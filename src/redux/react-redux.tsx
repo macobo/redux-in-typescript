@@ -18,7 +18,7 @@ export function connect<
     ActionType,
     ReduxStateProps extends Object,
     ReduxActionProps extends Object,
-    Props extends ReduxStateProps & ReduxActionProps
+    Props extends ReduxStateProps & ReduxActionProps & { children?: any }
 >(
     mapStateToProps: (
         state: StateType,
@@ -74,7 +74,5 @@ export function connect<
         return <ConnectedComponent {...props} />
     }
 
-    return (props: OwnProps) => (
-        <ReduxContext.Consumer>{(store: any) => renderWithStore(store, props)}</ReduxContext.Consumer>
-    )
+    return (props: OwnProps) => (<ReduxContext.Consumer>{(store: any) => renderWithStore(store, props)}</ReduxContext.Consumer>)
 }

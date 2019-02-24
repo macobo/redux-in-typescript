@@ -1,3 +1,5 @@
+import { mapValues } from 'lodash'
+
 type Reducer<StateType, ActionType> = (state: StateType, action: ActionType) => StateType
 
 export class ReduxStore<StateType, ActionType> {
@@ -33,4 +35,14 @@ export class ReduxStore<StateType, ActionType> {
     unsubscribe(index: number) {
         delete this.subscriptions[index]
     }
+}
+
+type ReducerMap<StateType, ActionType> = {
+    [K in keyof StateType]: Reducer<StateType[K], ActionType>
+}
+
+export function combineReducers<S, A>(reducers: ReducerMap<S, A>): Reducer<S, A> {
+    return (state, action) =>
+        // @ts-ignore
+        mapValues(reducers, (reducer, key) => reducer(state[key], action))
 }

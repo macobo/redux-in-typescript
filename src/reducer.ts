@@ -1,16 +1,27 @@
 import { State } from "./types"
 import { ActionType } from "./actions"
+import { combineReducers } from "./redux/redux"
 
-export default function reducer(state: State, action: ActionType): State {
+export function counter(state: number, action: ActionType): number {
     switch(action.type) {
         case 'INCREMENT_COUNTER':
-            return { ...state, counter: state.counter + 1 }
+            return state + 1
         case 'DECREMENT_COUNTER':
-            return { ...state, counter: state.counter - 1 }
+            return state - 1
         case 'RESET_COUNTER':
-            return { counter: 0, resetCount: state.resetCount + 1 }
-        // Note: Not actually needed
+            return 0
         default:
             return state
     }
 }
+
+export function resetCount(state: number, action: ActionType): number {
+    switch(action.type) {
+        case 'RESET_COUNTER':
+            return state + 1
+        default:
+            return state
+    }
+}
+
+export default combineReducers<State, ActionType>({ counter, resetCount })
