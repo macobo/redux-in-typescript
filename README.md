@@ -1,3 +1,13 @@
+# Building redux in react
+
+Small app made for a quick learning session. Learn more on typescript at:
+
+- https://basarat.gitbooks.io/typescript/content/docs/getting-started.html
+- https://www.typescriptlang.org/docs/handbook/basic-types.html
+- http://definitelytyped.org/
+
+----
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
